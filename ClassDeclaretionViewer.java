@@ -2,54 +2,53 @@ import java.lang.annotation.Annotation;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.TypeVariable;
 import java.lang.reflect.Type;
-
 public class ClassDeclaretionViewer{
     public static void main(String[] args){
         Class<?> clazz = null;
         try{
             clazz = Class.forName("java.util.ArrayList");
         }catch(ClassNotFoundException e){
-            System.out.println("Ã»ÓÐÕÒµ½¸ÃÀà£¡");
+            System.out.println("Ã»ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½à£¡");
         }
-        System.out.println("ÀàµÄ±ê×¼Ãû³Æ£º" + clazz.getCanonicalName());
-        System.out.println("ÀàµÄÐÞÊÎ·û£º" + Modifier.toString(clazz.getModifiers()));
+        System.out.println("ï¿½ï¿½ï¿½Ä±ï¿½×¼ï¿½ï¿½ï¿½Æ£ï¿½" + clazz.getCanonicalName());
+        System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î·ï¿½ï¿½ï¿½" + Modifier.toString(clazz.getModifiers()));
 
         TypeVariable<?>[] typeVariables = clazz.getTypeParameters();
-        System.out.print("ÀàµÄ·ºÐÍ²ÎÊý£º");
+        System.out.print("ï¿½ï¿½ï¿½Ä·ï¿½ï¿½Í²ï¿½ï¿½ï¿½ï¿½ï¿½");
         if(typeVariables.length != 0){
             for(TypeVariable<?> typeVariable :typeVariables){
                 System.out.println(typeVariable + "\t");
             }
         }else{
-            System.out.println("¿Õ");
+            System.out.println("ï¿½ï¿½");
         }
 
         Type[] interfaces = clazz.getGenericInterfaces();
-        System.out.println("ÀàËùÊµÏÖµÄ½Ó¿Ú£º");
+        System.out.println("ï¿½ï¿½ï¿½ï¿½Êµï¿½ÖµÄ½Ó¿Ú£ï¿½");
         if(interfaces.length != 0){
             for(Type type : interfaces){
                 System.out.println("\t" + type);
             }
         }else{
-            System.out.println("¿Õ");
+            System.out.println("ï¿½ï¿½");
         }
 
         Type superClass = clazz.getGenericSuperclass();
-        System.out.print("ÀàµÄÖ±½Ó¼Ì³ÐÀà£º");
+        System.out.print("ï¿½ï¿½ï¿½ï¿½Ö±ï¿½Ó¼Ì³ï¿½ï¿½à£º");
         if(superClass != null){
             System.out.println(superClass);
         }else{
-            System.out.println("¿Õ");
+            System.out.println("ï¿½ï¿½");
         }
 
         Annotation[] annotations = clazz.getAnnotations();
-        System.out.print("ÀàµÄ×¢½â£º");
+        System.out.print("ï¿½ï¿½ï¿½ï¿½×¢ï¿½â£º");
         if(annotations.length != 0){
             for(Annotation annotation : annotations){
                 System.out.println("\t" + annotation);
             }
         }else{
-            System.out.println("¿Õ");
+            System.out.println("ï¿½ï¿½");
         }
     }
 }
