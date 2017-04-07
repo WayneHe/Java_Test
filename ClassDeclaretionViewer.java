@@ -8,47 +8,47 @@ public class ClassDeclaretionViewer{
         try{
             clazz = Class.forName("java.util.ArrayList");
         }catch(ClassNotFoundException e){
-            System.out.println("Ã»ï¿½ï¿½ï¿½Òµï¿½ï¿½ï¿½ï¿½à£¡");
+            System.out.println("Î´ÕÒµ½¸ÃÀà£¡");
         }
-        System.out.println("ï¿½ï¿½ï¿½Ä±ï¿½×¼ï¿½ï¿½ï¿½Æ£ï¿½" + clazz.getCanonicalName());
-        System.out.println("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î·ï¿½ï¿½ï¿½" + Modifier.toString(clazz.getModifiers()));
+        System.out.println("ÀàÃûÎª£º\n\t" + clazz.getCanonicalName());
+        System.out.println("ÀàµÄÐÞÊÎ·û£º\n\t" + Modifier.toString(clazz.getModifiers()));
 
         TypeVariable<?>[] typeVariables = clazz.getTypeParameters();
-        System.out.print("ï¿½ï¿½ï¿½Ä·ï¿½ï¿½Í²ï¿½ï¿½ï¿½ï¿½ï¿½");
+        System.out.print("ÀàµÄ·ºÐÍ²ÎÊýÎª£º\n");
         if(typeVariables.length != 0){
             for(TypeVariable<?> typeVariable :typeVariables){
-                System.out.println(typeVariable + "\t");
+                System.out.println("\t" + typeVariable);
             }
         }else{
-            System.out.println("ï¿½ï¿½");
+            System.out.println("null");
         }
 
         Type[] interfaces = clazz.getGenericInterfaces();
-        System.out.println("ï¿½ï¿½ï¿½ï¿½Êµï¿½ÖµÄ½Ó¿Ú£ï¿½");
+        System.out.print("ÀàËùÊµÏÖµÄ½Ó¿ÚÎª£º\n");
         if(interfaces.length != 0){
             for(Type type : interfaces){
                 System.out.println("\t" + type);
             }
         }else{
-            System.out.println("ï¿½ï¿½");
+            System.out.println("null");
         }
 
         Type superClass = clazz.getGenericSuperclass();
-        System.out.print("ï¿½ï¿½ï¿½ï¿½Ö±ï¿½Ó¼Ì³ï¿½ï¿½à£º");
+        System.out.print("ÀàµÄÖ±½Ó¼Ì³ÐÀàÎª£º\n\t");
         if(superClass != null){
             System.out.println(superClass);
         }else{
-            System.out.println("ï¿½ï¿½");
+            System.out.println("null");
         }
 
         Annotation[] annotations = clazz.getAnnotations();
-        System.out.print("ï¿½ï¿½ï¿½ï¿½×¢ï¿½â£º");
+        System.out.print("ÀàµÄ×¢½âÎª£º\n\t");
         if(annotations.length != 0){
             for(Annotation annotation : annotations){
                 System.out.println("\t" + annotation);
             }
         }else{
-            System.out.println("ï¿½ï¿½");
+            System.out.println("null");
         }
     }
 }
