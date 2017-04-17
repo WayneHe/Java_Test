@@ -13,16 +13,21 @@ public class ClassDeclaretionViewer{
         }catch(ClassNotFoundException e){
             System.out.println("未找到该类！");
         }
-        ClassDeclaretionViewer classDeclaretionViewer = new ClassDeclaretionViewer();
-        classDeclaretionViewer.showInit(clazz);
-        classDeclaretionViewer.showTypeVariables(clazz);
-        classDeclaretionViewer.showInterfaces(clazz);
-        classDeclaretionViewer.showConstructors(clazz);
-        classDeclaretionViewer.showMethods(clazz);
-        classDeclaretionViewer.showFields(clazz);
-        classDeclaretionViewer.showClass(clazz);
-        classDeclaretionViewer.showSuperClass(clazz);
-        classDeclaretionViewer.showAnnotations(clazz);
+        ClassDeclaretionViewer.showAll(clazz);
+    }
+
+    public static void showAll(Class<?> clazz){
+        ClassDeclaretionViewer classViewer = null;
+        classViewer = new ClassDeclaretionViewer();
+        classViewer.showInit(clazz);
+        classViewer.showTypeVariables(clazz);
+        classViewer.showInterfaces(clazz);
+        classViewer.showConstructors(clazz);
+        classViewer.showMethods(clazz);
+        classViewer.showFields(clazz);
+        classViewer.showClass(clazz);
+        classViewer.showSuperClass(clazz);
+        classViewer.showAnnotations(clazz);
     }
 
     public void showInit(Class<?> clazz){
@@ -61,6 +66,20 @@ public class ClassDeclaretionViewer{
             System.out.println("该类无构造方法。");
             return ;
         }
+        for(Constructor constructor : constructors){
+            System.out.print("\t" + Modifier.toString(constructor.getModifiers()) + 
+                                " " + constructor.getName() + "(");
+            Class[] iParametrer = constructor.getParameterTypes();
+            int classLeng = iParametrer.length;
+            for(int i=0; i<classLeng; i++){
+                System.out.print(Modifier.toString(iParametrer[i].getModifiers()) + 
+                                iParametrer[i].getName());
+                if(i != classLeng-1){
+                    System.out.print(" ; ");
+                }
+            }
+            System.out.println(")");
+        }
     }
     public void showMethods(Class<?> clazz){
         Method[] methods = clazz.getDeclaredMethods();
@@ -69,6 +88,22 @@ public class ClassDeclaretionViewer{
         if(methodLeng == 0){
             System.out.print("该类未定义方法。");
             return ;
+        }
+        for(Method iMethod: methods){
+            System.out.print("\t" + Modifier.toString(iMethod.getModifiers()) + 
+                                " " + iMethod.getReturnType().getName() + " " +
+                                iMethod.getName() + "(");
+            Class[] iParametrer = iMethod.getParameterTypes();
+            int classLeng = iParametrer.length;
+            
+            for(int i=0; i<classLeng; i++){
+                System.out.print(Modifier.toString(iParametrer[i].getModifiers()) + 
+                                iParametrer[i].getName());
+                if(i != classLeng-1){
+                    System.out.print(" ; ");
+                }
+            }
+            System.out.println(")");
         }
     }
     public void showFields(Class<?> clazz){
@@ -79,6 +114,11 @@ public class ClassDeclaretionViewer{
             System.out.println("该类未定义成员变量。");
             return ;
         }
+        for(Field iField: fields){
+            System.out.println("\t" + Modifier.toString(iField.getModifiers()) +
+                                " " + iField.getType() + " " + iField.getName() + 
+                                ";");
+        }
     }
     public void showClass(Class<?> clazz){
         Class[] inClazz = clazz.getDeclaredClasses();
@@ -87,6 +127,13 @@ public class ClassDeclaretionViewer{
         if(inClazzLeng == 0){
             System.out.println("该类无内部类");
             return ;
+        }
+        if(inClazzLeng <= 5 ){
+            for(Class iClass : inClazz){
+                System.out.println("\t" + iClass.getCanonicalName());
+            }
+        }else{
+            System.out.println("\t" + "内部类过多，共" + inClazzLeng +"个");
         }
     }
 
