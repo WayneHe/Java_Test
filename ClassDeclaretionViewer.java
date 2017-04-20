@@ -7,13 +7,21 @@ import java.lang.reflect.TypeVariable;
 import java.lang.reflect.Type;
 public class ClassDeclaretionViewer{
     public static void main(String[] args){
-        Class<?> clazz = null;
-        try{
-            clazz = Class.forName("java.util.ArrayList");
-        }catch(ClassNotFoundException e){
-            System.out.println("未找到该类！");
+        if(args.length == 0){
+            System.out.println("请如下输入运行：");
+            System.out.println("java ClassDeclaretionViewer ***");
+            System.out.println("*** : 输入你要查找的类名（含包）");
+            return;
         }
-        ClassDeclaretionViewer.showAll(clazz);
+        for(String className : args){
+            Class<?> clazz = null;
+            try{
+                clazz = Class.forName(className);
+            }catch(ClassNotFoundException e){
+                System.out.println("未找到该类！");
+            }
+            ClassDeclaretionViewer.showAll(clazz);
+        }
     }
 
     public static void showAll(Class<?> clazz){
